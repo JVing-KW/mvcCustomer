@@ -43,15 +43,18 @@ public class mvcControllor extends HttpServlet {
 			List<MemberVO> membersList = memberDAO.listMembers();
 			request.setAttribute("membersList", membersList);
 			nextPage = "listMembers.jsp";
-		} else if (action.equals("/addmember.do")) {
+		} else if (action.equals("/addMember.do")) {
 			String id = request.getParameter("id");
 			String pwd = request.getParameter("pwd");
 			String name = request.getParameter("name");
 			String email = request.getParameter("email");
+			System.out.println("hi2");
 			MemberVO memberVO = new MemberVO(id, pwd, name, email);
+			System.out.println("hi3");
 			memberDAO.addMember(memberVO);
 			nextPage = "/member/listMembers.do";
 		}else if(action.equals("/memberForm.do")) {
+		
 			nextPage ="/memberForm.jsp";
 		}else
 		{
