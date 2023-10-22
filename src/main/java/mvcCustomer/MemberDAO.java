@@ -67,17 +67,17 @@ public class MemberDAO {
 		try {
 			// 서블릿에서 가져온걸 DAO에서 VO로 저정한걸가져옴
 			con = dataFactory.getConnection();
-			String id = m.getId();
-			String pwd = m.getPwd();
-			String name = m.getName();
-			String email = m.getEmail();
-			String query = "INSERT INTO t_member(id, pwd, name, email)" + " VALUES(?, ? ,? ,?)";
+//			String id = m.getId();
+//			String pwd = m.getPwd();
+//			String name = m.getName();
+//			String email = m.getEmail();
+			String query = "INSERT INTO t_member values(?, ?, ?, ?, default)";
 			System.out.println("PreparedStatement :" + query);
 			pstm = con.prepareStatement(query);
-			pstm.setString(1, id);
-			pstm.setString(2, pwd);
-			pstm.setString(3, name);
-			pstm.setString(4, email);
+			pstm.setString(1, m.getId());
+			pstm.setString(2, m.getPwd());
+			pstm.setString(3, m.getName());
+			pstm.setString(4, m.getEmail());
 			pstm.executeUpdate();
 			pstm.close();
 			con.close();
