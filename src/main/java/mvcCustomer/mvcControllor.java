@@ -56,7 +56,32 @@ public class mvcControllor extends HttpServlet {
 		}else if(action.equals("/memberForm.do")) {
 		
 			nextPage ="/memberForm.jsp";
-		}else
+		}else if(action.equals("/modMemberForm.do"))
+		{
+			String id = request.getParameter("id");
+			MemberVO memberInfo = memberDAO.findMember(id);
+			
+		request.setAttribute("memberInfo", memberInfo);
+		nextPage="/modMemberForm.jsp";
+			
+		}else if(action.equals("/modMember.do")) {
+			 String id=request.getParameter("id");
+		     String pwd=request.getParameter("pwd");
+		     String name= request.getParameter("name");
+	         String email= request.getParameter("email");
+		     MemberVO memberVO = new MemberVO(id, pwd, name, email);
+		     memberDAO.modMember(memberVO);
+		     request.setAttribute("msg", "modified");
+			nextPage="/member/listMembers.do";
+		}
+		else if(action.equals("/delMember.do")){
+		     String id=request.getParameter("id");
+		     memberDAO.delMember(id);
+		     request.setAttribute("msg", "deleted");
+		     nextPage="/member/listMembers.do";
+		     
+		     }
+		else
 		{
 			List<MemberVO> membersList = memberDAO.listMembers();
 			request.setAttribute("membersList", membersList);
@@ -66,5 +91,29 @@ public class mvcControllor extends HttpServlet {
 		
 		dispath.forward(request, response);
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

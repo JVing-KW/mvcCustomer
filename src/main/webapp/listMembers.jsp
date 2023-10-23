@@ -24,6 +24,29 @@ request.setCharacterEncoding("UTF-8");
        text-align:center;
      }
   </style>
+  <c:choose>
+   <c:when test='${msg=="addMember" }'>
+      <script>
+         window.onload=function(){
+            alert("회원을 등록했습니다.");
+         }
+      </script>
+   </c:when>
+   <c:when test='${msg=="modified" }'>
+      <script>
+        window.onload=function(){
+          alert("회원 정보를 수정했습니다.");
+        }
+      </script>
+   </c:when>
+   <c:when test= '${msg=="deleted" }'>
+      <script>
+         window.onload=function(){
+            alert("회원 정보를 삭제했습니다.");
+        } 
+      </script>
+</c:when>
+</c:choose>
   
 </head>
 <body>
@@ -53,6 +76,8 @@ request.setCharacterEncoding("UTF-8");
           <td>${mem.name}</td>     
           <td>${mem.email }</td>     
           <td>${mem.joinDate}</td>     
+            <td><a href="${contextPath}/member/modMemberForm.do?id=${mem.id }">수정</a></td>
+		   <td><a href="${contextPath}/member/delMember.do?id=${mem.id }">삭제</a></td>
        </tr>
      </c:forEach>
 </c:when>
